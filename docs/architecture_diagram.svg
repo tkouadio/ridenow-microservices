@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <style>
+    .box { fill: #f7f9fc; stroke: #2c3e50; stroke-width: 2; rx: 12; ry: 12; }
+    .db { fill: #eef6ff; stroke: #2c3e50; stroke-width: 2; }
+    .text { font-family: Arial, sans-serif; font-size: 20px; fill: #1f2d3d; }
+    .small { font-family: Arial, sans-serif; font-size: 16px; fill: #1f2d3d; }
+    .arrow { stroke: #34495e; stroke-width: 2.5; marker-end: url(#arrow); fill: none; }
+    .title { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #1f2d3d; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <text x="380" y="45" class="title">RideNow - Architecture microservices</text>
+
+  <rect x="60" y="250" width="180" height="80" class="box"/>
+  <text x="105" y="298" class="text">Client REST</text>
+
+  <rect x="320" y="240" width="200" height="100" class="box"/>
+  <text x="388" y="285" class="text">Gateway</text>
+  <text x="330" y="312" class="small">Stimulus + orchestration</text>
+
+  <rect x="620" y="80" width="220" height="90" class="box"/>
+  <text x="675" y="120" class="text">Identity</text>
+  <text x="626" y="147" class="small">Drivers, passengers, dispon.</text>
+
+  <rect x="620" y="220" width="220" height="90" class="box"/>
+  <text x="685" y="260" class="text">Pricing</text>
+  <text x="658" y="287" class="small">Prix fixes par zones</text>
+
+  <rect x="620" y="360" width="220" height="90" class="box"/>
+  <text x="705" y="400" class="text">Ride</text>
+  <text x="648" y="427" class="small">Cycle de vie de la course</text>
+
+  <rect x="620" y="500" width="220" height="90" class="box"/>
+  <text x="685" y="540" class="text">Payment</text>
+  <text x="653" y="567" class="small">Authorize / Capture</text>
+
+  <ellipse cx="1020" cy="125" rx="95" ry="40" class="db"/>
+  <text x="958" y="130" class="text">identity.db</text>
+
+  <ellipse cx="1020" cy="265" rx="90" ry="40" class="db"/>
+  <text x="966" y="270" class="text">pricing.db</text>
+
+  <ellipse cx="1020" cy="405" rx="78" ry="40" class="db"/>
+  <text x="980" y="410" class="text">ride.db</text>
+
+  <ellipse cx="1020" cy="545" rx="95" ry="40" class="db"/>
+  <text x="957" y="550" class="text">payment.db</text>
+
+  <line x1="240" y1="290" x2="320" y2="290" class="arrow"/>
+
+  <line x1="520" y1="270" x2="620" y2="125" class="arrow"/>
+  <line x1="520" y1="285" x2="620" y2="265" class="arrow"/>
+  <line x1="520" y1="300" x2="620" y2="405" class="arrow"/>
+  <line x1="520" y1="315" x2="620" y2="545" class="arrow"/>
+
+  <line x1="840" y1="125" x2="925" y2="125" class="arrow"/>
+  <line x1="840" y1="265" x2="930" y2="265" class="arrow"/>
+  <line x1="840" y1="405" x2="942" y2="405" class="arrow"/>
+  <line x1="840" y1="545" x2="925" y2="545" class="arrow"/>
+
+  <text x="130" y="650" class="small">Chaque service possède sa base locale. Le gateway applique timeout / retry simple et expose un point d'entrée unique pour la démonstration.</text>
+</svg>

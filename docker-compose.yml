@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  gateway:
+    build: ./gateway
+    container_name: ridenow-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      IDENTITY_URL: http://identity:8001
+      PRICING_URL: http://pricing:8002
+      RIDE_URL: http://ride:8003
+      PAYMENT_URL: http://payment:8004
+      REQUEST_TIMEOUT_SECONDS: "3"
+      RETRY_COUNT: "1"
+    depends_on:
+      - identity
+      - pricing
+      - ride
+      - payment
+
+  identity:
+    build: ./services/identity
+    container_name: ridenow-identity
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: sqlite:///./identity.db
+
+  pricing:
+    build: ./services/pricing
+    container_name: ridenow-pricing
+    ports:
+      - "8002:8002"
+    environment:
+      DATABASE_URL: sqlite:///./pricing.db
+
+  ride:
+    build: ./services/ride
+    container_name: ridenow-ride
+    ports:
+      - "8003:8003"
+    environment:
+      DATABASE_URL: sqlite:///./ride.db
+
+  payment:
+    build: ./services/payment
+    container_name: ridenow-payment
+    ports:
+      - "8004:8004"
+    environment:
+      DATABASE_URL: sqlite:///./payment.db

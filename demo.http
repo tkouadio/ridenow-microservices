@@ -1,0 +1,43 @@
+### Health checks
+GET http://localhost:8000/health
+GET http://localhost:8001/health
+GET http://localhost:8002/health
+GET http://localhost:8003/health
+GET http://localhost:8004/health
+
+### Create ride
+POST http://localhost:8000/demo/request-ride
+Content-Type: application/json
+
+{
+  "passenger_id": 100,
+  "from_zone": "A",
+  "to_zone": "B"
+}
+
+### Accept ride
+PATCH http://localhost:8000/demo/rides/1/status
+Content-Type: application/json
+
+{
+  "status": "ACCEPTED"
+}
+
+### Start ride
+PATCH http://localhost:8000/demo/rides/1/status
+Content-Type: application/json
+
+{
+  "status": "STARTED"
+}
+
+### Complete ride
+PATCH http://localhost:8000/demo/rides/1/status
+Content-Type: application/json
+
+{
+  "status": "COMPLETED"
+}
+
+### Read final view
+GET http://localhost:8000/demo/rides/1
