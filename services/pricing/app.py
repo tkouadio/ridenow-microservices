@@ -51,6 +51,13 @@ def seed(db: Session) -> None:
             PriceRule(from_zone='A', to_zone='A', amount=8.0),
             PriceRule(from_zone='B', to_zone='B', amount=8.0),
             PriceRule(from_zone='C', to_zone='C', amount=8.0),
+            PriceRule(from_zone='D', to_zone='D', amount=8.0),
+            PriceRule(from_zone='A', to_zone='D', amount=25.0),
+            PriceRule(from_zone='D', to_zone='A', amount=25.0),
+            PriceRule(from_zone='B', to_zone='D', amount=20.0),
+            PriceRule(from_zone='D', to_zone='B', amount=20.0),
+            PriceRule(from_zone='C', to_zone='D', amount=12.0),
+            PriceRule(from_zone='D', to_zone='C', amount=12.0),
         ]
         db.add_all(rules)
         db.commit()

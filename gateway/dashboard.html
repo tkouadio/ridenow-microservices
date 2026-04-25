@@ -80,6 +80,13 @@
     .log-ok  { color: #4ade80; }
     .log-err { color: #f87171; }
     .log-empty { color: #444; font-style: italic; }
+    .log-auto { color: #f59e0b; }
+
+    /* Auto mode */
+    .auto-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.75rem; flex-wrap: wrap; }
+    .toggle-label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; color: #666; cursor: pointer; }
+    input[type=checkbox] { width: 15px; height: 15px; cursor: pointer; accent-color: #1a1a2e; }
+    input[type=number] { width: 65px; padding: 0.4rem 0.5rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.88rem; }
   </style>
 </head>
 <body>
@@ -126,18 +133,27 @@
       <div class="form-group">
         <label>Zone départ</label>
         <select id="from-zone">
-          <option>A</option><option>B</option><option>C</option>
+          <option>A</option><option>B</option><option>C</option><option>D</option>
         </select>
       </div>
       <div class="form-group">
         <label>Zone arrivée</label>
         <select id="to-zone">
-          <option>B</option><option>A</option><option>C</option>
+          <option>B</option><option>A</option><option>C</option><option>D</option>
         </select>
       </div>
       <button class="btn-primary" id="btn-request" onclick="requestRide()">Demander</button>
     </div>
     <div id="request-msg" class="msg hidden"></div>
+    <div class="auto-row">
+      <label class="toggle-label">
+        <input type="checkbox" id="auto-mode"> Mode automatique
+      </label>
+      <div class="form-group" style="flex-direction:row;align-items:center;gap:.4rem">
+        <label style="white-space:nowrap">Délai (s)</label>
+        <input type="number" id="auto-delay" value="3" min="1" max="30">
+      </div>
+    </div>
   </div>
 
   <!-- Active ride -->
@@ -181,6 +197,8 @@
 <script>
 let currentRideId = null;
 let currentStatus = null;
+let autoTimer = null;
+const NEXT_STATUS = { ASSIGNED: 'ACCEPTED', ACCEPTED: 'STARTED', STARTED: 'COMPLETED' };
 
 async function api(url, options = {}) {
   const res = await fetch(url, options);
@@ -244,6 +262,7 @@ async function requestRide() {
     showMsg(msgEl, `Course #${currentRideId} créée — chauffeur ${data.driver.name} assigné.`, 'success');
     renderRide(data.ride, data.payment);
     refreshDrivers();
+    if (document.getElementById('auto-mode').checked) scheduleNext(data.ride.status);
   } catch (e) {
     log('err', `${e.code}  ${e.detail}`);
     showMsg(msgEl, `Erreur ${e.code} : ${e.detail}`, 'error');
@@ -271,6 +290,8 @@ async function advanceStatus(status) {
       showMsg(msgEl, 'Course terminée — paiement capturé, chauffeur libéré.', 'success');
       refreshDrivers();
     }
+    if (document.getElementById('auto-mode').checked && data.ride.status !== 'COMPLETED')
+      scheduleNext(data.ride.status);
   } catch (e) {
     log('err', `${e.code}  ${e.detail}`);
     showMsg(msgEl, `Erreur ${e.code} : ${e.detail}`, 'error');
@@ -318,7 +339,17 @@ function setActionButtons(disabled) {
   });
 }
 
+function scheduleNext(status) {
+  const next = NEXT_STATUS[status];
+  if (!next) return;
+  const delay = parseInt(document.getElementById('auto-delay').value) || 3;
+  log('auto', `⏱  auto → ${next} dans ${delay}s`);
+  autoTimer = setTimeout(() => advanceStatus(next), delay * 1000);
+}
+
 function resetRide() {
+  clearTimeout(autoTimer);
+  autoTimer = null;
   currentRideId = null;
   currentStatus = null;
   document.getElementById('ride-card').classList.add('hidden');
@@ -331,8 +362,8 @@ function log(type, text) {
   const empty = panel.querySelector('.log-empty');
   if (empty) empty.parentElement.remove();
   const now = new Date().toLocaleTimeString('fr-CA', { hour12: false });
-  const cls = type === 'req' ? 'log-req' : type === 'ok' ? 'log-ok' : 'log-err';
-  const prefix = type === 'req' ? '→' : '←';
+  const cls = type === 'req' ? 'log-req' : type === 'ok' ? 'log-ok' : type === 'auto' ? 'log-auto' : 'log-err';
+  const prefix = type === 'req' ? '→' : type === 'auto' ? '' : '←';
   const entry = document.createElement('div');
   entry.className = 'log-entry';
   entry.innerHTML = `<span class="log-time">${now}</span><span class="${cls}">${prefix} ${text}</span>`;

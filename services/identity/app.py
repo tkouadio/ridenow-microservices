@@ -67,6 +67,8 @@ def seed(db: Session) -> None:
             Driver(id=1, name='Alice Driver', current_zone='A', available=True),
             Driver(id=2, name='Bob Driver', current_zone='B', available=False),
             Driver(id=3, name='Charlie Driver', current_zone='A', available=True),
+            Driver(id=4, name='Diana Driver', current_zone='C', available=True),
+            Driver(id=5, name='Eve Driver', current_zone='D', available=True),
         ])
     if db.query(Passenger).count() == 0:
         db.add_all([
