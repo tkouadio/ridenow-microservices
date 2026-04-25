@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Titre -->
+    <mxCell id="10" value="RideNow — Diagramme de composants" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+      <mxGeometry x="200" y="20" width="720" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Frontière Docker Compose Network -->
+    <mxCell id="20" value="Docker Compose Network" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;strokeColor=#9e9e9e;fillColor=#fafafa;verticalAlign=top;fontSize=12;fontColor=#9e9e9e;fontStyle=3;arcSize=2;" vertex="1" parent="1">
+      <mxGeometry x="230" y="90" width="880" height="590" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- CLIENT (extérieur au réseau)        -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="30" value="&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;curl / Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;arcSize=15;" vertex="1" parent="1">
+      <mxGeometry x="50" y="340" width="150" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- GATEWAY                             -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="40" value="&lt;font color='#aaaaff' size='1'&gt;«component»&lt;/font&gt;&lt;br&gt;&lt;font color='#ffffff'&gt;&lt;b&gt;Gateway&lt;/b&gt;&lt;br&gt;:8000&lt;/font&gt;&lt;br&gt;&lt;font color='#888888' size='1'&gt;timeout / retry&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=#3d3d6b;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="300" y="300" width="190" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- IDENTITY SERVICE                    -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="50" value="&lt;font color='#555555' size='1'&gt;«component»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Identity Service&lt;/b&gt;&lt;br&gt;:8001&lt;br&gt;&lt;font size='1' color='#888888'&gt;drivers · passengers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="580" y="115" width="200" height="90" as="geometry" />
+    </mxCell>
+
+    <mxCell id="51" value="identity.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="860" y="128" width="130" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- PRICING SERVICE                     -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="60" value="&lt;font color='#555555' size='1'&gt;«component»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Pricing Service&lt;/b&gt;&lt;br&gt;:8002&lt;br&gt;&lt;font size='1' color='#888888'&gt;prix fixes par zone&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="580" y="245" width="200" height="90" as="geometry" />
+    </mxCell>
+
+    <mxCell id="61" value="pricing.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="860" y="258" width="130" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- RIDE SERVICE                        -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="70" value="&lt;font color='#555555' size='1'&gt;«component»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Ride Service&lt;/b&gt;&lt;br&gt;:8003&lt;br&gt;&lt;font size='1' color='#888888'&gt;cycle de vie · machine d'état&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="580" y="375" width="200" height="90" as="geometry" />
+    </mxCell>
+
+    <mxCell id="71" value="ride.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="860" y="388" width="130" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- PAYMENT SERVICE                     -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="80" value="&lt;font color='#555555' size='1'&gt;«component»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Payment Service&lt;/b&gt;&lt;br&gt;:8004&lt;br&gt;&lt;font size='1' color='#888888'&gt;authorize · capture (mock)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="580" y="505" width="200" height="90" as="geometry" />
+    </mxCell>
+
+    <mxCell id="81" value="payment.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="860" y="518" width="130" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- CONNEXIONS                          -->
+    <!-- ═══════════════════════════════════ -->
+
+    <!-- Client → Gateway -->
+    <mxCell id="100" value="REST / HTTP" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;fontColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="30" target="40" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Gateway → Identity -->
+    <mxCell id="101" value="GET /passengers/{id}&#xa;GET /drivers&#xa;PATCH /drivers/{id}/availability" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#555555;fontColor=#555555;fontSize=9;align=left;exitX=1;exitY=0;exitDx=0;exitDy=20;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="40" target="50" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Gateway → Pricing -->
+    <mxCell id="102" value="GET /price?from=X&amp;amp;to=Y" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#555555;fontColor=#555555;fontSize=9;exitX=1;exitY=0.33;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="40" target="60" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Gateway → Ride -->
+    <mxCell id="103" value="POST /rides&#xa;PATCH /rides/{id}/status&#xa;PATCH /rides/{id}/payment-status" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#555555;fontColor=#555555;fontSize=9;align=left;exitX=1;exitY=0.67;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="40" target="70" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Gateway → Payment -->
+    <mxCell id="104" value="POST /payments/authorize&#xa;POST /payments/capture" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#555555;fontColor=#555555;fontSize=9;align=left;exitX=1;exitY=1;exitDx=0;exitDy=-20;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="40" target="80" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Identity → identity.db -->
+    <mxCell id="105" value="SQLite" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;fontColor=#b8860b;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="50" target="51" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Pricing → pricing.db -->
+    <mxCell id="106" value="SQLite" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;fontColor=#b8860b;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="60" target="61" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Ride → ride.db -->
+    <mxCell id="107" value="SQLite" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;fontColor=#b8860b;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="70" target="71" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Payment → payment.db -->
+    <mxCell id="108" value="SQLite" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;fontColor=#b8860b;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="80" target="81" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- LÉGENDE                             -->
+    <!-- ═══════════════════════════════════ -->
+    <mxCell id="200" value="Légende" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="50" y="490" width="80" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="201" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=#3d3d6b;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="50" y="515" width="24" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="202" value="Gateway (orchestrateur)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="82" y="513" width="160" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="203" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="50" y="538" width="24" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="204" value="Microservice" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="82" y="536" width="160" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="205" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=6;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="50" y="560" width="24" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="206" value="Base de données SQLite (locale par service)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="82" y="558" width="220" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- Note -->
+    <mxCell id="210" value="⚠ Les services ne communiquent pas directement entre eux.&#xa;Toute orchestration passe exclusivement par le Gateway." style="text;html=1;strokeColor=#d6b656;fillColor=#fffbe6;align=left;verticalAlign=middle;fontSize=10;fontColor=#7a5c00;whiteSpace=wrap;rounded=1;spacingLeft=6;spacingRight=6;" vertex="1" parent="1">
+      <mxGeometry x="50" y="600" width="330" height="50" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

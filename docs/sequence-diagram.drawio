@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Titre -->
+    <mxCell id="10" value="RideNow — Diagramme de séquence (flux nominal)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=17;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+      <mxGeometry x="100" y="10" width="950" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════════════
+         TÊTES DE LIFELINES
+         x centres : Client=80  Gateway=250  Identity=430  Pricing=610  Ride=790  Payment=980
+         ════════════════════════════════════════ -->
+
+    <mxCell id="20" value="&lt;b&gt;Client&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="48" width="120" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="21" value="&lt;font color='#ffffff'&gt;&lt;b&gt;Gateway&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=#1a1a2e;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="190" y="48" width="120" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="22" value="&lt;b&gt;Identity&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="370" y="48" width="120" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="23" value="&lt;b&gt;Pricing&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="550" y="48" width="120" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="24" value="&lt;b&gt;Ride&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="730" y="48" width="120" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="25" value="&lt;b&gt;Payment&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="920" y="48" width="120" height="38" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════════════
+         LIGNES DE VIE (pointillés verticaux)
+         ════════════════════════════════════════ -->
+
+    <mxCell id="30" value="" style="endArrow=none;dashed=1;strokeColor=#aaaaaa;html=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="80"  y="86" as="sourcePoint"/>
+        <mxPoint x="80"  y="760" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="31" value="" style="endArrow=none;dashed=1;strokeColor=#aaaaaa;html=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="86" as="sourcePoint"/>
+        <mxPoint x="250" y="760" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="32" value="" style="endArrow=none;dashed=1;strokeColor=#aaaaaa;html=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="430" y="86" as="sourcePoint"/>
+        <mxPoint x="430" y="760" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="33" value="" style="endArrow=none;dashed=1;strokeColor=#aaaaaa;html=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="610" y="86" as="sourcePoint"/>
+        <mxPoint x="610" y="760" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="34" value="" style="endArrow=none;dashed=1;strokeColor=#aaaaaa;html=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="86" as="sourcePoint"/>
+        <mxPoint x="790" y="760" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="35" value="" style="endArrow=none;dashed=1;strokeColor=#aaaaaa;html=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="980" y="86" as="sourcePoint"/>
+        <mxPoint x="980" y="760" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ════════════════════════════════════════
+         PHASE 1 — Création de course
+         ════════════════════════════════════════ -->
+
+    <mxCell id="40" value="1 — Création de course" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=3;fontColor=#1a1a2e;" vertex="1" parent="1">
+      <mxGeometry x="4" y="105" width="170" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- M1: Client → Gateway -->
+    <mxCell id="101" value="POST /demo/request-ride" style="endArrow=block;endFill=1;html=1;strokeColor=#1a1a2e;fontColor=#1a1a2e;fontSize=10;align=center;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="80"  y="130" as="sourcePoint"/>
+        <mxPoint x="250" y="130" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M2: Gateway → Identity (passenger) -->
+    <mxCell id="102" value="GET /passengers/100" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="165" as="sourcePoint"/>
+        <mxPoint x="430" y="165" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M3: Gateway → Identity (driver) -->
+    <mxCell id="103" value="GET /drivers?available=true&amp;zone=A" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="200" as="sourcePoint"/>
+        <mxPoint x="430" y="200" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M4: Gateway → Pricing -->
+    <mxCell id="104" value="GET /price?from=A&amp;to=B" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="235" as="sourcePoint"/>
+        <mxPoint x="610" y="235" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M5: Gateway → Ride (create) -->
+    <mxCell id="105" value="POST /rides  [status: ASSIGNED]" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="270" as="sourcePoint"/>
+        <mxPoint x="790" y="270" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M6: Gateway → Payment (authorize) -->
+    <mxCell id="106" value="POST /payments/authorize" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="305" as="sourcePoint"/>
+        <mxPoint x="980" y="305" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M7: Gateway → Identity (reserve driver) -->
+    <mxCell id="107" value="PATCH /drivers/1  {available: false}" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="340" as="sourcePoint"/>
+        <mxPoint x="430" y="340" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M8: Gateway → Client (return 201) -->
+    <mxCell id="108" value="201 Created — ride #1  ASSIGNED  $15.00" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#1a1a2e;fontColor=#1a1a2e;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="375" as="sourcePoint"/>
+        <mxPoint x="80"  y="375" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Séparateur -->
+    <mxCell id="50" value="" style="endArrow=none;html=1;dashed=1;strokeColor=#cccccc;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="15"  y="405" as="sourcePoint"/>
+        <mxPoint x="1100" y="405" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ════════════════════════════════════════
+         PHASE 2 — Progression des statuts
+         ════════════════════════════════════════ -->
+
+    <mxCell id="41" value="2 — Progression des statuts" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=3;fontColor=#1a1a2e;" vertex="1" parent="1">
+      <mxGeometry x="4" y="412" width="200" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- M9: Client → Gateway (ACCEPTED) -->
+    <mxCell id="109" value="PATCH /rides/1/status  {ACCEPTED}" style="endArrow=block;endFill=1;html=1;strokeColor=#1a1a2e;fontColor=#1a1a2e;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="80"  y="435" as="sourcePoint"/>
+        <mxPoint x="250" y="435" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M10: Gateway → Ride (ACCEPTED) -->
+    <mxCell id="110" value="PATCH /rides/1/status" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="460" as="sourcePoint"/>
+        <mxPoint x="790" y="460" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M11: Client → Gateway (STARTED) -->
+    <mxCell id="111" value="PATCH /rides/1/status  {STARTED}" style="endArrow=block;endFill=1;html=1;strokeColor=#1a1a2e;fontColor=#1a1a2e;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="80"  y="495" as="sourcePoint"/>
+        <mxPoint x="250" y="495" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M12: Gateway → Ride (STARTED) -->
+    <mxCell id="112" value="PATCH /rides/1/status" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="520" as="sourcePoint"/>
+        <mxPoint x="790" y="520" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M13: Client → Gateway (COMPLETED) -->
+    <mxCell id="113" value="PATCH /rides/1/status  {COMPLETED}" style="endArrow=block;endFill=1;html=1;strokeColor=#1a1a2e;fontColor=#1a1a2e;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="80"  y="555" as="sourcePoint"/>
+        <mxPoint x="250" y="555" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M14: Gateway → Ride (COMPLETED) -->
+    <mxCell id="114" value="PATCH /rides/1/status" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="580" as="sourcePoint"/>
+        <mxPoint x="790" y="580" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M15: Gateway → Payment (capture) -->
+    <mxCell id="115" value="POST /payments/capture" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="615" as="sourcePoint"/>
+        <mxPoint x="980" y="615" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M16: Gateway → Identity (release driver) -->
+    <mxCell id="116" value="PATCH /drivers/1  {available: true}" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;fontColor=#555555;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="650" as="sourcePoint"/>
+        <mxPoint x="430" y="650" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M17: Gateway → Client (return 200) -->
+    <mxCell id="117" value="200 OK — COMPLETED  paiement CAPTURED" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#1a1a2e;fontColor=#1a1a2e;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="250" y="685" as="sourcePoint"/>
+        <mxPoint x="80"  y="685" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ════════════════════════════════════════
+         LÉGENDE
+         ════════════════════════════════════════ -->
+
+    <mxCell id="60" value="→  appel synchrone     ··▷  réponse" style="text;html=1;strokeColor=#dddddd;fillColor=#fafafa;align=left;fontSize=10;fontColor=#888888;whiteSpace=wrap;rounded=1;spacingLeft=8;" vertex="1" parent="1">
+      <mxGeometry x="870" y="740" width="260" height="28" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

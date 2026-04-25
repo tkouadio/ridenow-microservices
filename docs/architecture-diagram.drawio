@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ════════════════════════════════
+         TITRE
+         ════════════════════════════════ -->
+    <mxCell id="10" value="RideNow — Architecture Microservices" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+      <mxGeometry x="150" y="12" width="850" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         BANDES DE COUCHES (fond)
+         ════════════════════════════════ -->
+
+    <!-- Couche Client -->
+    <mxCell id="20" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f4fd;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="55" width="1169" height="100" as="geometry" />
+    </mxCell>
+    <mxCell id="20b" value="Client" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=3;fontColor=#6c8ebf;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="-22" y="115" width="60" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- Couche Gateway -->
+    <mxCell id="21" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="165" width="1169" height="90" as="geometry" />
+    </mxCell>
+    <mxCell id="21b" value="Gateway" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=3;fontColor=#3d3d6b;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="-22" y="225" width="70" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- Couche Services -->
+    <mxCell id="22" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="265" width="1169" height="155" as="geometry" />
+    </mxCell>
+    <mxCell id="22b" value="Microservices" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=3;fontColor=#666666;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="-22" y="355" width="90" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- Couche Persistance -->
+    <mxCell id="23" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fef9e7;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="430" width="1169" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="23b" value="Persistance" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=3;fontColor=#b8860b;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="-22" y="500" width="80" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         CLIENT
+         centre x=584
+         ════════════════════════════════ -->
+    <mxCell id="30" value="&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;&lt;font size='10' color='#5588aa'&gt;curl · Browser · Dashboard&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;arcSize=20;" vertex="1" parent="1">
+      <mxGeometry x="474" y="68" width="220" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         DOCKER COMPOSE BOUNDARY
+         ════════════════════════════════ -->
+    <mxCell id="40" value="Docker Compose Network" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 4;strokeColor=#9e9e9e;fillColor=none;verticalAlign=top;fontSize=10;fontColor=#9e9e9e;fontStyle=2;arcSize=1;" vertex="1" parent="1">
+      <mxGeometry x="130" y="160" width="910" height="400" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         GATEWAY
+         x=145 w=890  centre x=590
+         ════════════════════════════════ -->
+    <mxCell id="50" value="&lt;font color='#ffffff'&gt;&lt;b&gt;API Gateway&lt;/b&gt;   :8000&lt;/font&gt;&lt;font color='#8888cc'&gt;  |  timeout · retry  |  FastAPI / Python 3.11&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=#3d3d6b;fontSize=12;arcSize=5;" vertex="1" parent="1">
+      <mxGeometry x="145" y="182" width="880" height="58" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         MICROSERVICES
+         centres x : 249 · 469 · 689 · 909
+         ════════════════════════════════ -->
+
+    <!-- Identity -->
+    <mxCell id="60" value="&lt;font color='#888888' size='1'&gt;«service»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Identity&lt;/b&gt;&lt;br&gt;:8001&lt;br&gt;&lt;font size='1' color='#999999'&gt;passengers · drivers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="152" y="280" width="195" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Pricing -->
+    <mxCell id="61" value="&lt;font color='#888888' size='1'&gt;«service»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Pricing&lt;/b&gt;&lt;br&gt;:8002&lt;br&gt;&lt;font size='1' color='#999999'&gt;prix fixes par zone&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="372" y="280" width="195" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Ride -->
+    <mxCell id="62" value="&lt;font color='#888888' size='1'&gt;«service»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Ride&lt;/b&gt;&lt;br&gt;:8003&lt;br&gt;&lt;font size='1' color='#999999'&gt;cycle de vie · machine d'état&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="592" y="280" width="195" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Payment -->
+    <mxCell id="63" value="&lt;font color='#888888' size='1'&gt;«service»&lt;/font&gt;&lt;br&gt;&lt;b&gt;Payment&lt;/b&gt;&lt;br&gt;:8004&lt;br&gt;&lt;font size='1' color='#999999'&gt;authorize · capture (mock)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=12;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="812" y="280" width="195" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         BASES DE DONNÉES (cylinders)
+         ════════════════════════════════ -->
+
+    <mxCell id="70" value="identity.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="177" y="445" width="145" height="65" as="geometry" />
+    </mxCell>
+
+    <mxCell id="71" value="pricing.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="397" y="445" width="145" height="65" as="geometry" />
+    </mxCell>
+
+    <mxCell id="72" value="ride.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="617" y="445" width="145" height="65" as="geometry" />
+    </mxCell>
+
+    <mxCell id="73" value="payment.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="837" y="445" width="145" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         FLÈCHES
+         ════════════════════════════════ -->
+
+    <!-- Client → Gateway -->
+    <mxCell id="80" value="REST / JSON" style="endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;fontColor=#6c8ebf;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="30" target="50" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Gateway → Identity -->
+    <mxCell id="81" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="249" y="240" as="sourcePoint"/>
+        <mxPoint x="249" y="280" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Gateway → Pricing -->
+    <mxCell id="82" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="469" y="240" as="sourcePoint"/>
+        <mxPoint x="469" y="280" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Gateway → Ride -->
+    <mxCell id="83" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="689" y="240" as="sourcePoint"/>
+        <mxPoint x="689" y="280" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Gateway → Payment -->
+    <mxCell id="84" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#555555;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="909" y="240" as="sourcePoint"/>
+        <mxPoint x="909" y="280" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Label commun Gateway → Services -->
+    <mxCell id="85" value="HTTP · REST / JSON" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#888888;" vertex="1" parent="1">
+      <mxGeometry x="460" y="246" width="140" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Identity → identity.db -->
+    <mxCell id="86" value="" style="endArrow=ERmany;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="249" y="370" as="sourcePoint"/>
+        <mxPoint x="249" y="445" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Pricing → pricing.db -->
+    <mxCell id="87" value="" style="endArrow=ERmany;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="469" y="370" as="sourcePoint"/>
+        <mxPoint x="469" y="445" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Ride → ride.db -->
+    <mxCell id="88" value="" style="endArrow=ERmany;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="689" y="370" as="sourcePoint"/>
+        <mxPoint x="689" y="445" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Payment → payment.db -->
+    <mxCell id="89" value="" style="endArrow=ERmany;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="909" y="370" as="sourcePoint"/>
+        <mxPoint x="909" y="445" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ════════════════════════════════
+         PIED DE PAGE — Tech stack + note
+         ════════════════════════════════ -->
+
+    <mxCell id="90" value="Python 3.11  ·  FastAPI 0.116  ·  Uvicorn  ·  SQLAlchemy  ·  SQLite  ·  Docker Compose 3.9" style="text;html=1;strokeColor=#dddddd;fillColor=#f9f9f9;align=center;fontSize=10;fontColor=#aaaaaa;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="300" y="580" width="570" height="28" as="geometry" />
+    </mxCell>
+
+    <mxCell id="91" value="⚠  Pattern : orchestration centralisée — les services ne communiquent pas directement entre eux" style="text;html=1;strokeColor=#ffe0a0;fillColor=#fffbe6;align=center;fontSize=10;fontColor=#7a5c00;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="250" y="620" width="670" height="28" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
