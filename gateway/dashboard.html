@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RideNow Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f4f4f8; color: #222; }
+
+    header { background: #1a1a2e; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: .03em; }
+    header span { font-size: 0.8rem; opacity: 0.6; }
+
+    main { max-width: 860px; margin: 2rem auto; padding: 0 1rem; display: grid; gap: 1.25rem; }
+
+    .card { background: white; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    .card h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .08em; color: #888; margin-bottom: 1rem; font-weight: 600; }
+
+    /* Health */
+    .health-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .health-item { display: flex; align-items: center; gap: 0.45rem; font-size: 0.88rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #ccc; flex-shrink: 0; }
+    .dot.ok { background: #22c55e; }
+    .dot.error { background: #ef4444; }
+
+    /* Drivers */
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { text-align: left; padding: 0.35rem 0.6rem; color: #999; font-weight: 500; border-bottom: 1px solid #f0f0f0; }
+    td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #f7f7f7; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+    .badge.available { background: #dcfce7; color: #16a34a; }
+    .badge.unavailable { background: #fee2e2; color: #dc2626; }
+
+    /* Form */
+    .form-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+    .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    label { font-size: 0.78rem; color: #888; font-weight: 500; }
+    select { padding: 0.45rem 0.65rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.88rem; background: white; }
+    select:focus { outline: 2px solid #1a1a2e; border-color: transparent; }
+
+    button { padding: 0.5rem 1.1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: opacity .15s; }
+    button:hover { opacity: 0.85; }
+    button:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-primary { background: #1a1a2e; color: white; }
+    .btn-secondary { background: #f0f0f0; color: #444; }
+    .btn-success { background: #16a34a; color: white; }
+
+    /* State machine */
+    .state-machine { display: flex; align-items: center; gap: 0.4rem; margin: 1rem 0; flex-wrap: wrap; }
+    .state { padding: 0.35rem 0.85rem; border: 2px solid #e0e0e0; border-radius: 20px; font-size: 0.82rem; color: #bbb; font-weight: 500; transition: all .2s; }
+    .state.done { border-color: #22c55e; color: #16a34a; background: #f0fdf4; }
+    .state.active { border-color: #1a1a2e; color: #1a1a2e; background: #eef0ff; font-weight: 700; }
+    .state.completed { border-color: #22c55e; color: #16a34a; background: #dcfce7; font-weight: 700; }
+    .state.cancelled { border-color: #ef4444; color: #dc2626; background: #fee2e2; }
+    .arrow { color: #ccc; font-size: 1rem; }
+
+    /* Info grid */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.65rem; margin: 1rem 0 0.5rem; }
+    .info-item { background: #f8f8fb; border-radius: 7px; padding: 0.6rem 0.8rem; }
+    .info-item .k { font-size: 0.72rem; color: #999; font-weight: 500; margin-bottom: 0.15rem; }
+    .info-item .v { font-size: 1rem; font-weight: 700; }
+
+    .actions { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+
+    .msg { font-size: 0.83rem; padding: 0.45rem 0.8rem; border-radius: 6px; margin-top: 0.75rem; }
+    .msg.error { background: #fee2e2; color: #dc2626; }
+    .msg.success { background: #dcfce7; color: #15803d; }
+    .hidden { display: none; }
+
+    /* Log panel */
+    .log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .log-header h2 { margin: 0; }
+    .log-panel { background: #0f0f1a; border-radius: 7px; padding: 0.75rem; max-height: 220px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+    .log-entry { display: flex; gap: 0.6rem; padding: 0.15rem 0; border-bottom: 1px solid #1e1e2e; }
+    .log-entry:last-child { border-bottom: none; }
+    .log-time { color: #555; flex-shrink: 0; }
+    .log-req { color: #60a5fa; }
+    .log-ok  { color: #4ade80; }
+    .log-err { color: #f87171; }
+    .log-empty { color: #444; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>RideNow Dashboard</h1>
+  <span>MGL7361 — Microservices PoC</span>
+</header>
+
+<main>
+
+  <!-- Health -->
+  <div class="card">
+    <h2>Services</h2>
+    <div class="health-grid" id="health-grid">
+      <span style="color:#bbb;font-size:0.85rem">Chargement…</span>
+    </div>
+  </div>
+
+  <!-- Drivers -->
+  <div class="card">
+    <h2>Chauffeurs</h2>
+    <table>
+      <thead>
+        <tr><th>Nom</th><th>Zone</th><th>Statut</th></tr>
+      </thead>
+      <tbody id="drivers-body">
+        <tr><td colspan="3" style="color:#bbb;padding:.6rem">Chargement…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Request ride -->
+  <div class="card">
+    <h2>Nouvelle course</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Passager</label>
+        <select id="passenger-id">
+          <option value="100">Paul Passenger (100)</option>
+          <option value="101">Mia Passenger (101)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Zone départ</label>
+        <select id="from-zone">
+          <option>A</option><option>B</option><option>C</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Zone arrivée</label>
+        <select id="to-zone">
+          <option>B</option><option>A</option><option>C</option>
+        </select>
+      </div>
+      <button class="btn-primary" id="btn-request" onclick="requestRide()">Demander</button>
+    </div>
+    <div id="request-msg" class="msg hidden"></div>
+  </div>
+
+  <!-- Active ride -->
+  <div class="card hidden" id="ride-card">
+    <h2>Course en cours &mdash; <span id="ride-id-label"></span></h2>
+
+    <div class="state-machine">
+      <div class="state" id="st-ASSIGNED">ASSIGNED</div>
+      <div class="arrow">→</div>
+      <div class="state" id="st-ACCEPTED">ACCEPTED</div>
+      <div class="arrow">→</div>
+      <div class="state" id="st-STARTED">STARTED</div>
+      <div class="arrow">→</div>
+      <div class="state" id="st-COMPLETED">COMPLETED</div>
+    </div>
+
+    <div class="info-grid" id="ride-info"></div>
+
+    <div class="actions">
+      <button class="btn-primary" id="btn-accept" onclick="advanceStatus('ACCEPTED')">Accepter</button>
+      <button class="btn-primary" id="btn-start" onclick="advanceStatus('STARTED')">Démarrer</button>
+      <button class="btn-success" id="btn-complete" onclick="advanceStatus('COMPLETED')">Compléter</button>
+      <button class="btn-secondary" onclick="resetRide()">Nouvelle course</button>
+    </div>
+    <div id="status-msg" class="msg hidden"></div>
+  </div>
+
+  <!-- Activity log -->
+  <div class="card">
+    <div class="log-header">
+      <h2>Activité</h2>
+      <button class="btn-secondary" style="font-size:.78rem;padding:.3rem .7rem" onclick="clearLogs()">Effacer</button>
+    </div>
+    <div class="log-panel" id="log-panel">
+      <div class="log-entry"><span class="log-empty">Aucune activité pour l'instant…</span></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+let currentRideId = null;
+let currentStatus = null;
+
+async function api(url, options = {}) {
+  const res = await fetch(url, options);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw { code: res.status, detail: data.detail || res.statusText };
+  return data;
+}
+
+const SERVICE_LABELS = {
+  gateway: 'Gateway :8000',
+  identity: 'Identity :8001',
+  pricing: 'Pricing :8002',
+  ride: 'Ride :8003',
+  payment: 'Payment :8004',
+};
+
+async function refreshHealth() {
+  try {
+    const data = await api('/demo/all-health');
+    document.getElementById('health-grid').innerHTML = Object.entries(data)
+      .map(([k, v]) => `<div class="health-item">
+        <div class="dot ${v.status === 'ok' ? 'ok' : 'error'}"></div>
+        <span>${SERVICE_LABELS[k] || k}</span>
+      </div>`).join('');
+  } catch {
+    document.getElementById('health-grid').innerHTML = '<span style="color:#ef4444;font-size:.85rem">Erreur de connexion</span>';
+  }
+}
+
+async function refreshDrivers() {
+  try {
+    const drivers = await api('/demo/drivers');
+    document.getElementById('drivers-body').innerHTML = drivers.map(d => `
+      <tr>
+        <td>${d.name}</td>
+        <td>${d.current_zone}</td>
+        <td><span class="badge ${d.available ? 'available' : 'unavailable'}">${d.available ? 'Disponible' : 'En course'}</span></td>
+      </tr>`).join('');
+  } catch {
+    document.getElementById('drivers-body').innerHTML = '<tr><td colspan="3" style="color:#bbb">Erreur de chargement</td></tr>';
+  }
+}
+
+async function requestRide() {
+  const btn = document.getElementById('btn-request');
+  const msgEl = document.getElementById('request-msg');
+  btn.disabled = true;
+  hideMsg(msgEl);
+  const passengerId = parseInt(document.getElementById('passenger-id').value);
+  const fromZone = document.getElementById('from-zone').value;
+  const toZone = document.getElementById('to-zone').value;
+  log('req', `POST /demo/request-ride  passenger=${passengerId} ${fromZone}→${toZone}`);
+  try {
+    const data = await api('/demo/request-ride', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passenger_id: passengerId, from_zone: fromZone, to_zone: toZone }),
+    });
+    currentRideId = data.ride.id;
+    log('ok', `201  [Identity · Pricing · Ride · Payment]  ride #${data.ride.id} — ${data.driver.name} — $${data.ride.amount.toFixed(2)}`);
+    showMsg(msgEl, `Course #${currentRideId} créée — chauffeur ${data.driver.name} assigné.`, 'success');
+    renderRide(data.ride, data.payment);
+    refreshDrivers();
+  } catch (e) {
+    log('err', `${e.code}  ${e.detail}`);
+    showMsg(msgEl, `Erreur ${e.code} : ${e.detail}`, 'error');
+    btn.disabled = false;
+  }
+}
+
+async function advanceStatus(status) {
+  if (!currentRideId) return;
+  const msgEl = document.getElementById('status-msg');
+  hideMsg(msgEl);
+  setActionButtons(true);
+  log('req', `PATCH /demo/rides/${currentRideId}/status  → ${status}`);
+  const prevStatus = currentStatus;
+  try {
+    const data = await api(`/demo/rides/${currentRideId}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    });
+    const svc = status === 'COMPLETED' ? '[Ride · Payment · Identity]' : '[Ride]';
+    log('ok', `200  ${svc}  ${prevStatus} → ${data.ride.status}${data.payment ? '  |  paiement ' + data.payment.status : ''}`);
+    renderRide(data.ride, data.payment || null);
+    if (status === 'COMPLETED') {
+      showMsg(msgEl, 'Course terminée — paiement capturé, chauffeur libéré.', 'success');
+      refreshDrivers();
+    }
+  } catch (e) {
+    log('err', `${e.code}  ${e.detail}`);
+    showMsg(msgEl, `Erreur ${e.code} : ${e.detail}`, 'error');
+    setActionButtons(false);
+    syncButtons(currentStatus);
+  }
+}
+
+function renderRide(ride, payment) {
+  currentStatus = ride.status;
+
+  document.getElementById('ride-card').classList.remove('hidden');
+  document.getElementById('ride-id-label').textContent = `#${ride.id}`;
+
+  const order = ['ASSIGNED', 'ACCEPTED', 'STARTED', 'COMPLETED'];
+  const idx = order.indexOf(ride.status);
+  order.forEach((s, i) => {
+    const el = document.getElementById(`st-${s}`);
+    el.className = 'state';
+    if (i < idx) el.classList.add('done');
+    else if (s === ride.status) el.classList.add(s === 'COMPLETED' ? 'completed' : s === 'CANCELLED' ? 'cancelled' : 'active');
+  });
+
+  const payStatus = (payment && payment.status) || ride.payment_status;
+  document.getElementById('ride-info').innerHTML = `
+    <div class="info-item"><div class="k">Trajet</div><div class="v">${ride.from_zone} → ${ride.to_zone}</div></div>
+    <div class="info-item"><div class="k">Montant</div><div class="v">$${ride.amount.toFixed(2)}</div></div>
+    <div class="info-item"><div class="k">Statut</div><div class="v">${ride.status}</div></div>
+    <div class="info-item"><div class="k">Paiement</div><div class="v">${payStatus}</div></div>
+  `;
+
+  syncButtons(ride.status);
+}
+
+function syncButtons(status) {
+  document.getElementById('btn-accept').classList.toggle('hidden', status !== 'ASSIGNED');
+  document.getElementById('btn-start').classList.toggle('hidden', status !== 'ACCEPTED');
+  document.getElementById('btn-complete').classList.toggle('hidden', status !== 'STARTED');
+  setActionButtons(false);
+}
+
+function setActionButtons(disabled) {
+  ['btn-accept', 'btn-start', 'btn-complete'].forEach(id => {
+    document.getElementById(id).disabled = disabled;
+  });
+}
+
+function resetRide() {
+  currentRideId = null;
+  currentStatus = null;
+  document.getElementById('ride-card').classList.add('hidden');
+  document.getElementById('btn-request').disabled = false;
+  hideMsg(document.getElementById('request-msg'));
+}
+
+function log(type, text) {
+  const panel = document.getElementById('log-panel');
+  const empty = panel.querySelector('.log-empty');
+  if (empty) empty.parentElement.remove();
+  const now = new Date().toLocaleTimeString('fr-CA', { hour12: false });
+  const cls = type === 'req' ? 'log-req' : type === 'ok' ? 'log-ok' : 'log-err';
+  const prefix = type === 'req' ? '→' : '←';
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="log-time">${now}</span><span class="${cls}">${prefix} ${text}</span>`;
+  panel.appendChild(entry);
+  panel.scrollTop = panel.scrollHeight;
+}
+
+function clearLogs() {
+  document.getElementById('log-panel').innerHTML =
+    '<div class="log-entry"><span class="log-empty">Aucune activité pour l\'instant…</span></div>';
+}
+
+function showMsg(el, text, type) {
+  el.textContent = text;
+  el.className = `msg ${type}`;
+}
+
+function hideMsg(el) {
+  el.className = 'msg hidden';
+}
+
+refreshHealth();
+refreshDrivers();
+setInterval(refreshHealth, 5000);
+setInterval(refreshDrivers, 4000);
+</script>
+</body>
+</html>

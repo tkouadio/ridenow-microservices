@@ -1,10 +1,12 @@
 import asyncio
 import logging
 import os
+import pathlib
 from typing import Any
 
 import httpx
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 logging.basicConfig(level=logging.INFO, format='[GATEWAY] %(asctime)s %(levelname)s %(message)s')
@@ -45,9 +47,36 @@ async def request_with_retry(method: str, url: str, **kwargs: Any) -> httpx.Resp
     raise HTTPException(status_code=504, detail=f'Upstream timeout or network error for {url}: {last_exc}')
 
 
+@app.get('/', response_class=HTMLResponse, include_in_schema=False)
+def dashboard():
+    html = pathlib.Path('dashboard.html').read_text()
+    return HTMLResponse(content=html)
+
+
 @app.get('/health')
 def health():
     return {'status': 'ok', 'service': 'gateway'}
+
+
+@app.get('/demo/all-health')
+async def all_health():
+    results: dict[str, Any] = {'gateway': {'status': 'ok', 'service': 'gateway'}}
+    for name, url in [('identity', IDENTITY_URL), ('pricing', PRICING_URL),
+                      ('ride', RIDE_URL), ('payment', PAYMENT_URL)]:
+        try:
+            resp = await request_with_retry('GET', f'{url}/health')
+            results[name] = resp.json() if resp.status_code == 200 else {'status': 'error'}
+        except Exception:
+            results[name] = {'status': 'error'}
+    return results
+
+
+@app.get('/demo/drivers')
+async def list_drivers():
+    resp = await request_with_retry('GET', f'{IDENTITY_URL}/drivers')
+    if resp.status_code != 200:
+        raise HTTPException(status_code=resp.status_code, detail='Failed to list drivers')
+    return resp.json()
 
 
 @app.get('/demo/services')

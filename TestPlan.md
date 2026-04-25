@@ -119,8 +119,7 @@ curl -s -X PATCH http://localhost:8000/demo/rides/1/status \
     },
     "payment": {
         "status": "CAPTURED"
-    },
-    "driver_availability": {
+    }, "driver_availability": {
         "available": true
     }
 }
